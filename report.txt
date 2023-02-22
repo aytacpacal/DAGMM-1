@@ -1,0 +1,95 @@
+TensorFlow 2.0 Upgrade Script
+-----------------------------
+Converted 5 files
+Detected 2 issues that require attention
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+File: dagmm/dagmm.py
+--------------------------------------------------------------------------------
+dagmm/dagmm.py:209:8: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+File: dagmm/estimation_net.py
+--------------------------------------------------------------------------------
+dagmm/estimation_net.py:59:21: ERROR: Using member tf.contrib.layers.softmax in deprecated module tf.contrib. tf.contrib.layers.softmax cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+================================================================================
+Detailed log follows:
+
+================================================================================
+================================================================================
+Input tree: 'dagmm/'
+================================================================================
+--------------------------------------------------------------------------------
+Processing file 'dagmm/compression_net.py'
+ outputting to 'dagmm_v2/compression_net.py'
+--------------------------------------------------------------------------------
+
+64:27: INFO: Added keywords to args of function 'tf.reduce_sum'
+70:16: INFO: Added keywords to args of function 'tf.reduce_sum'
+118:15: INFO: Added keywords to args of function 'tf.reduce_mean'
+118:30: INFO: Added keywords to args of function 'tf.reduce_sum'
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'dagmm/dagmm.py'
+ outputting to 'dagmm_v2/dagmm.py'
+--------------------------------------------------------------------------------
+
+126:31: INFO: Added keywords to args of function 'tf.reduce_mean'
+130:24: INFO: Renamed 'tf.train.AdamOptimizer' to 'tf.compat.v1.train.AdamOptimizer'
+136:19: INFO: Renamed 'tf.global_variables_initializer' to 'tf.compat.v1.global_variables_initializer'
+138:24: INFO: Renamed 'tf.Session' to 'tf.compat.v1.Session'
+163:12: INFO: Renamed 'tf.add_to_collection' to 'tf.compat.v1.add_to_collection'
+164:12: INFO: Renamed 'tf.add_to_collection' to 'tf.compat.v1.add_to_collection'
+166:25: INFO: Renamed 'tf.train.Saver' to 'tf.compat.v1.train.Saver'
+209:8: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+231:24: INFO: Renamed 'tf.Session' to 'tf.compat.v1.Session'
+232:25: INFO: Renamed 'tf.train.import_meta_graph' to 'tf.compat.v1.train.import_meta_graph'
+235:38: INFO: Renamed 'tf.get_collection' to 'tf.compat.v1.get_collection'
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'dagmm/estimation_net.py'
+ outputting to 'dagmm_v2/estimation_net.py'
+--------------------------------------------------------------------------------
+
+59:21: ERROR: Using member tf.contrib.layers.softmax in deprecated module tf.contrib. tf.contrib.layers.softmax cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'dagmm/gmm.py'
+ outputting to 'dagmm_v2/gmm.py'
+--------------------------------------------------------------------------------
+
+13:13: INFO: Renamed 'tf.variable_scope' to 'tf.compat.v1.variable_scope'
+38:13: INFO: Renamed 'tf.variable_scope' to 'tf.compat.v1.variable_scope'
+43:24: INFO: Added keywords to args of function 'tf.reduce_sum'
+44:29: INFO: Added keywords to args of function 'tf.reduce_mean'
+52:23: INFO: Renamed 'tf.diag' to 'tf.linalg.tensor_diag'
+53:21: INFO: Renamed 'tf.cholesky' to 'tf.linalg.cholesky'
+75:12: INFO: Renamed 'tf.assign' to 'tf.compat.v1.assign'
+76:12: INFO: Renamed 'tf.assign' to 'tf.compat.v1.assign'
+77:12: INFO: Renamed 'tf.assign' to 'tf.compat.v1.assign'
+78:12: INFO: Renamed 'tf.assign' to 'tf.compat.v1.assign'
+107:13: INFO: Renamed 'tf.variable_scope' to 'tf.compat.v1.variable_scope'
+111:16: INFO: Renamed 'tf.matrix_triangular_solve' to 'tf.linalg.triangular_solve'
+111:51: INFO: Added keywords to args of function 'tf.transpose'
+114:34: INFO: Added keywords to args of function 'tf.reduce_sum'
+114:48: INFO: Renamed 'tf.log' to 'tf.math.log'
+114:55: INFO: Renamed 'tf.matrix_diag_part' to 'tf.linalg.diag_part'
+118:21: INFO: Renamed 'tf.log' to 'tf.math.log'
+118:55: INFO: Added keywords to args of function 'tf.reduce_sum'
+119:22: INFO: Renamed 'tf.log' to 'tf.math.log'
+120:25: INFO: Added keywords to args of function 'tf.reduce_logsumexp'
+125:13: INFO: Renamed 'tf.variable_scope' to 'tf.compat.v1.variable_scope'
+126:24: INFO: Added keywords to args of function 'tf.reduce_sum'
+126:51: INFO: Renamed 'tf.matrix_diag_part' to 'tf.linalg.diag_part'
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'dagmm/__init__.py'
+ outputting to 'dagmm_v2/__init__.py'
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+

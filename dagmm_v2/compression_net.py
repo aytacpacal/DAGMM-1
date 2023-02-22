@@ -61,13 +61,13 @@ class CompressionNet:
 
     def loss(self, x, x_dash):
         def euclid_norm(x):
-            return tf.sqrt(tf.reduce_sum(tf.square(x), axis=1))
+            return tf.sqrt(tf.reduce_sum(input_tensor=tf.square(x), axis=1))
 
         # Calculate Euclid norm, distance
         norm_x = euclid_norm(x)
         norm_x_dash = euclid_norm(x_dash)
         dist_x = euclid_norm(x - x_dash)
-        dot_x = tf.reduce_sum(x * x_dash, axis=1)
+        dot_x = tf.reduce_sum(input_tensor=x * x_dash, axis=1)
 
         # Based on the original paper, features of reconstraction error
         # are composed of these loss functions:
@@ -115,5 +115,5 @@ class CompressionNet:
         return z, x_dash
 
     def reconstruction_error(self, x, x_dash):
-        return tf.reduce_mean(tf.reduce_sum(
-            tf.square(x - x_dash), axis=1), axis=0)
+        return tf.reduce_mean(input_tensor=tf.reduce_sum(
+            input_tensor=tf.square(x - x_dash), axis=1), axis=0)

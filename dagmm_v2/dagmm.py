@@ -3,9 +3,9 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 import joblib
 
-from dagmm.compression_net import CompressionNet
-from dagmm.estimation_net import EstimationNet
-from dagmm.gmm import GMM
+from dagmm_v2.compression_net import CompressionNet
+from dagmm_v2.estimation_net import EstimationNet
+from dagmm_v2.gmm import GMM
 
 from os import makedirs
 from os.path import exists, join
@@ -123,19 +123,19 @@ class DAGMM:
 
             # Loss function
             loss = (self.comp_net.reconstruction_error(input, x_dash) +
-                self.lambda1 * tf.reduce_mean(energy) +
+                self.lambda1 * tf.reduce_mean(input_tensor=energy) +
                 self.lambda2 * self.gmm.cov_diag_loss())
 
             # Minimizer
-            minimizer = tf.train.AdamOptimizer(self.learning_rate).minimize(loss)
+            minimizer = tf.compat.v1.train.AdamOptimizer(self.learning_rate).minimize(loss)
 
             # Number of batch
             n_batch = (n_samples - 1) // self.minibatch_size + 1
 
             # Create tensorflow session and initilize
-            init = tf.global_variables_initializer()
+            init = tf.compat.v1.global_variables_initializer()
 
-            self.sess = tf.Session(graph=graph)
+            self.sess = tf.compat.v1.Session(graph=graph)
             self.sess.run(init)
 
             # Training
@@ -160,10 +160,10 @@ class DAGMM:
             self.sess.run(fix, feed_dict={input:x, drop:0})
             self.energy = self.gmm.energy(z)
 
-            tf.add_to_collection("save", self.input)
-            tf.add_to_collection("save", self.energy)
+            tf.compat.v1.add_to_collection("save", self.input)
+            tf.compat.v1.add_to_collection("save", self.energy)
 
-            self.saver = tf.train.Saver()
+            self.saver = tf.compat.v1.train.Saver()
 
     def predict(self, x):
         """ Calculate anormaly scores (sample energy) on samples in X.
@@ -228,11 +228,11 @@ class DAGMM:
 
         with tf.Graph().as_default() as graph:
             self.graph = graph
-            self.sess = tf.Session(graph=graph)
-            self.saver = tf.train.import_meta_graph(meta_path)
+            self.sess = tf.compat.v1.Session(graph=graph)
+            self.saver = tf.compat.v1.train.import_meta_graph(meta_path)
             self.saver.restore(self.sess, model_path)
 
-            self.input, self.energy = tf.get_collection("save")
+            self.input, self.energy = tf.compat.v1.get_collection("save")
 
         if self.normalize:
             scaler_path = join(fdir, self.SCALER_FILENAME)
